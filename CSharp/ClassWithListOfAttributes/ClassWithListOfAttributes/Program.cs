@@ -18,7 +18,11 @@ namespace ClassWithListOfAttributes
 
     public class TimeSeriesDaily
     {
-        public string thing1 { get; set; }
+        public DateTime Date { get; set; }
+        public decimal Open { get; set; }
+        public decimal High { get; set; }
+        public decimal Low { get; set; }
+        public decimal Close { get; set; }
     }
 
     
@@ -34,8 +38,20 @@ namespace ClassWithListOfAttributes
                 Market = "NYSE",
                 TSD =
                 {
-                    new TimeSeriesDaily() {thing1 = "1"},
-                    new TimeSeriesDaily() {thing1 = "2"}
+                    new TimeSeriesDaily() {
+                        Date = DateTime.Parse("2021-01-01"),
+                        Open = 20,
+                        High = 22,
+                        Low = 19,
+                        Close = 22
+                    },
+                    new TimeSeriesDaily() {
+                        Date = DateTime.Parse("2021-01-02"),
+                        Open = 21,
+                        High = 23,
+                        Low = 20,
+                        Close = 23
+                    }
                 }
             });
 
@@ -45,31 +61,46 @@ namespace ClassWithListOfAttributes
                 Market = "NYSE",
                 TSD =
                 {
-                    new TimeSeriesDaily() {thing1 = "3"},
-                    new TimeSeriesDaily() {thing1 = "4"}
+                    new TimeSeriesDaily() {
+                        Date = DateTime.Parse("2021-01-01"),
+                        Open = 20,
+                        High = 22,
+                        Low = 19,
+                        Close = 22
+                    },
+                    new TimeSeriesDaily() {
+                        Date = DateTime.Parse("2021-01-02"),
+                        Open = 21,
+                        High = 23,
+                        Low = 20,
+                        Close = 23
+                    }
                 }
             });
 
 
-            var Symbol = "";
-            var Market = "";
-            var Date = "";
+            var symbol = "";
+            var market = "";
+            DateTime date;
+            decimal open;
+            decimal high;
+            decimal low;
+            decimal close;
 
             foreach (var stock in stocks)
             {
-                Console.WriteLine(stock.Symbol);
-                Symbol = stock.Symbol;
-                Market = stock.Market;
+                symbol = stock.Symbol;
+                market = stock.Market;
                 
                 foreach (TimeSeriesDaily t in stock.TSD)
                 {
-                    Date = t.thing1;
-                    //Console.WriteLine(t.thing1);
+                    date = t.Date;
+                    open = t.Open;
+                    high = t.High;
+                    low = t.Low;
+                    close = t.Close;                    
                 }
-            }
-
-            //Console.WriteLine(stocks);
-            Console.WriteLine("");
+            }                        
         }
     }
 }
