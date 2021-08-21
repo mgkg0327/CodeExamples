@@ -3,104 +3,50 @@ using System.Collections.Generic;
 
 namespace ClassWithListOfAttributes
 {
-    
-    public class Stock
-    {
-        public string Symbol { get; set; }
-        public string Market { get; set; }
-        public List<TimeSeriesDaily> TSD { get; set; }
 
-        public Stock()
+    public class Car
+    {
+        public string Model { get; set; }
+        public Attributes Attributes { get; set; }
+        public List<ZeroSixtyTimes> ZST { get; set; }
+
+        public Car()
         {
-            TSD = new List<TimeSeriesDaily>();
+            Attributes = new Attributes();
+            ZST = new List<ZeroSixtyTimes>();
         }
     }
 
-    public class TimeSeriesDaily
+    public class Attributes
     {
-        public DateTime Date { get; set; }
-        public decimal Open { get; set; }
-        public decimal High { get; set; }
-        public decimal Low { get; set; }
-        public decimal Close { get; set; }
+        public string Colors { get; set; }
+        public int WheelCount { get; set; }
     }
 
-    
+    public class ZeroSixtyTimes
+    {
+        public int Time { get; set; }
+    }
+
     class Program
     {
         static void Main(string[] args)
         {
-
-            List<Stock> stocks = new List<Stock>();
-
-            stocks.Add(new Stock() {
-                Symbol = "NKE",
-                Market = "NYSE",
-                TSD =
-                {
-                    new TimeSeriesDaily() {
-                        Date = DateTime.Parse("2021-01-01"),
-                        Open = 20,
-                        High = 22,
-                        Low = 19,
-                        Close = 22
-                    },
-                    new TimeSeriesDaily() {
-                        Date = DateTime.Parse("2021-01-02"),
-                        Open = 21,
-                        High = 23,
-                        Low = 20,
-                        Close = 23
-                    }
-                }
-            });
-
-            stocks.Add(new Stock()
+            var car = new Car
             {
-                Symbol = "TSLA",
-                Market = "NYSE",
-                TSD =
+                Model = "Mustang",
+                Attributes =
                 {
-                    new TimeSeriesDaily() {
-                        Date = DateTime.Parse("2021-01-01"),
-                        Open = 20,
-                        High = 22,
-                        Low = 19,
-                        Close = 22
-                    },
-                    new TimeSeriesDaily() {
-                        Date = DateTime.Parse("2021-01-02"),
-                        Open = 21,
-                        High = 23,
-                        Low = 20,
-                        Close = 23
-                    }
+                    Colors = "Red",
+                    WheelCount = 4
+                },
+                ZST = {
+                    new ZeroSixtyTimes() {Time = 6},
+                    new ZeroSixtyTimes() {Time = 7}
                 }
-            });
+            };
 
-
-            var symbol = "";
-            var market = "";
-            DateTime date;
-            decimal open;
-            decimal high;
-            decimal low;
-            decimal close;
-
-            foreach (var stock in stocks)
-            {
-                symbol = stock.Symbol;
-                market = stock.Market;
-                
-                foreach (TimeSeriesDaily t in stock.TSD)
-                {
-                    date = t.Date;
-                    open = t.Open;
-                    high = t.High;
-                    low = t.Low;
-                    close = t.Close;                    
-                }
-            }                        
+            Console.WriteLine("Hello World!");
         }
     }
 }
